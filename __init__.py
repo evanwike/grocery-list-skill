@@ -17,7 +17,7 @@ class GroceryList(MycroftSkill):
 
     @intent_file_handler('list.grocery.intent')
     def handle_list_grocery(self, message):
-        for (item in self.grocery_list)
+        for item in self.grocery_list:
             self.speak(item)
         # self.speak_dialog('list.grocery')
 
