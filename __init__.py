@@ -6,10 +6,9 @@ LOGGER = getLogger(__name__)
 
 URI = 'mongodb://root:password1@ds049446.mlab.com:49446/hackathon'
 CLIENT = pymongo.MongoClient(URI)
-DB = CLIENT.get_default_database()
-
-evan = DB['evan']
-tondi = DB['tondi']
+DB = CLIENT.get_database()
+USER = 'user'
+lists = DB['lists']
 
 class GroceryList(MycroftSkill):
     def __init__(self):
@@ -22,11 +21,9 @@ class GroceryList(MycroftSkill):
         item = message.data.get("item")
 
         if item not in self.grocery_list:
-            self.grocery_list.append(item)
+            self.grocery_list.append({'item': item})
         else:
             self.speak_dialog('add_error', data={'item': item})
-
-        evan.insert_many(self.grocery_list)
 
         # Detect if item is plural for has/
         message = item + (' have' if item[len(item) - 1] == 's' else ' has')
@@ -63,3 +60,6 @@ class GroceryList(MycroftSkill):
 
 def create_skill():
     return GroceryList()
+
+def update_db():
+    lists.update_one({'name': USER}, {'items': self.grocery_list}, upsert=True)
