@@ -13,7 +13,7 @@ lists = DB['lists']
 class GroceryList(MycroftSkill):
     def __init__(self):
         MycroftSkill.__init__(self)
-        self.grocery_list = []
+        self.grocery_list = lists.find_one({'name': USER})['items']
 
     # Add item to grocery list
     @intent_file_handler('add_item.intent')
