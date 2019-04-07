@@ -1,5 +1,4 @@
 from mycroft import MycroftSkill, intent_file_handler
-LOGGER = getLogger(__name__)
 
 class GroceryList(MycroftSkill):
     def __init__(self):
