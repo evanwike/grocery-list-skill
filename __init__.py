@@ -26,7 +26,7 @@ class GroceryList(MycroftSkill):
             self.grocery_list.remove(item)
 
             # Detect if item is plural for has/have
-            if item[len(item)] == 's':
+            if item[len(item) - 1] == 's':
                 self.speak_dialog('remove_success', data={'message': '{} have'.format(item)})
             else:
                 self.speak_dialog('remove_success', data={'message': '{} has'.format(item)})
