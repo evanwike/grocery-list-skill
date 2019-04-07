@@ -1,11 +1,13 @@
 from mycroft import MycroftSkill, intent_file_handler
 
+__author__ = 'evanwike'
+LOGGER = getLogger(__name__)
 
 class GroceryList(MycroftSkill):
     def __init__(self):
-        MycroftSkill.__init__(self)
-
-        grocery_list = []
+        # MycroftSkill.__init__(self)
+        super("GroceryList", self).__init__(name="GroceryList")
+        self.grocery_list = []
 
     @intent_file_handler('add_item.intent')
     def handle_add_item_intent(self, message):
