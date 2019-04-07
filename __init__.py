@@ -22,7 +22,7 @@ class GroceryList(MycroftSkill):
 
         if item not in self.grocery_list:
             self.grocery_list.append({'item': item})
-            update_db()
+            update_db(self.grocery_list)
         else:
             self.speak_dialog('add_error', data={'item': item})
 
@@ -37,7 +37,7 @@ class GroceryList(MycroftSkill):
 
         if item not in self.grocery_list:
             self.speak_dialog('remove_error', data={'item': item})
-            update_db()
+            update_db(self.grocery_list)
         else:
             self.grocery_list.remove(item)
 
@@ -63,5 +63,5 @@ class GroceryList(MycroftSkill):
 def create_skill():
     return GroceryList()
 
-def update_db():
-    lists.update_one({'name': USER}, {'items': self.grocery_list}, upsert=True)
+def update_db(list: list):
+    lists.update_one({'name': USER}, {'items': list}, upsert=True)
