@@ -52,6 +52,8 @@ class GroceryList(MycroftSkill):
 
     @intent_file_handler('list_items.intent')
     def handle_list_grocery(self, message):
+        LOGGER.debug(self.grocery_list)
+        
         if len(self.grocery_list) > 0:
             self.speak_dialog("list_items")
             for item in self.grocery_list:
