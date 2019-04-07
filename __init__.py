@@ -6,23 +6,22 @@ LOGGER = getLogger(__name__)
 class GroceryList(MycroftSkill):
     def __init__(self):
         MycroftSkill.__init__(self)
-        self.grocery_list = ['Apples', 'Milk']
+        self.grocery_list = []
 
     @intent_file_handler('add_item.intent')
     def handle_add_item_intent(self, message):
-        try:
-            item = message.data.get("item")
-
-            self.grocery_list.append(item)
-            self.speak_dialog("add_success", data=item)
-        except:
-            self.speak_dialog("add_error")
+        item = message.data.get("item")
+        self.grocery_list.append(item)
+        self.speak_dialog("add_success", data={'item': item})
 
     @intent_file_handler('list.grocery.intent')
     def handle_list_grocery(self, message):
-        self.speak_dialog("list_items")
-        for item in self.grocery_list:
-            self.speak(item)
+        if len(self.grocery_list) > 0:
+            self.speak_dialog("list_items")
+            for item in self.grocery_list:
+                self.speak(item)
+        else:
+            self.speak_dialog("empty_list")
         # self.speak_dialog('list.grocery')
 
 def create_skill():
