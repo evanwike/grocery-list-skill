@@ -15,7 +15,6 @@ class GroceryList(MycroftSkill):
     def __init__(self):
         MycroftSkill.__init__(self)
         self.grocery_list = []
-        evan.insert_many(self.grocery_list)
 
     # Add item to grocery list
     @intent_file_handler('add_item.intent')
@@ -26,6 +25,8 @@ class GroceryList(MycroftSkill):
             self.grocery_list.append(item)
         else:
             self.speak_dialog('add_error', data={'item': item})
+
+        evan.insert_many(self.grocery_list)
 
         # Detect if item is plural for has/
         message = item + (' have' if item[len(item) - 1] == 's' else ' has')
