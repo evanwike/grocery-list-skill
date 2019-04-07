@@ -13,7 +13,10 @@ class GroceryList(MycroftSkill):
     def handle_add_item_intent(self, message):
         item = message.data.get("item")
         self.grocery_list.append(item)
-        self.speak_dialog("add_success", data={'item': item})
+
+        # Detect if item is plural for has/have
+        message = item + item[len(item) - 1] == 's' ? ' have' : ' has'
+        self.speak_dialog('add_success', data={'message': message})
 
     # Remove item from grocery list
     @intent_file_handler('remove_item.intent')
@@ -26,10 +29,8 @@ class GroceryList(MycroftSkill):
             self.grocery_list.remove(item)
 
             # Detect if item is plural for has/have
-            if item[len(item) - 1] == 's':
-                self.speak_dialog('remove_success', data={'message': '{} have'.format(item)})
-            else:
-                self.speak_dialog('remove_success', data={'message': '{} has'.format(item)})
+            message = item + item[len(item) - 1] == 's' ? ' have' : ' has'
+            self.speak_dialog('remove_success', data={'message': message})
 
     @intent_file_handler('list.grocery.intent')
     def handle_list_grocery(self, message):
