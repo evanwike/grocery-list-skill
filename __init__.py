@@ -24,7 +24,7 @@ class GroceryList(MycroftSkill):
         item = message.data.get('item')
 
         if item not in self.grocery_list:
-            self.speak_dialog('remove_error')
+            self.speak_dialog('remove_error', data={'item': item})
         else:
             self.grocery_list.remove(item)
 
