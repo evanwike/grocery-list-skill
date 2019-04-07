@@ -21,7 +21,7 @@ class GroceryList(MycroftSkill):
         item = message.data.get("item")
 
         if item not in self.grocery_list:
-            self.grocery_list.append({'item': item})
+            self.grocery_list.append(item)
             update_db(self.grocery_list)
         else:
             self.speak_dialog('add_error', data={'item': item})
@@ -52,8 +52,6 @@ class GroceryList(MycroftSkill):
 
     @intent_file_handler('list_items.intent')
     def handle_list_grocery(self, message):
-        LOGGER.debug(self.grocery_list)
-        
         if len(self.grocery_list) > 0:
             self.speak_dialog("list_items")
             for item in self.grocery_list:
@@ -65,5 +63,5 @@ class GroceryList(MycroftSkill):
 def create_skill():
     return GroceryList()
 
-def update_db(list: list):
-    lists.update_one({'name': USER}, {'$set': {'items': [x.get('item') for x in list]}}, upsert=True)
+def update_db(grocery_list: list):
+    lists.update_one({'name': USER}, {'$set': {'items': grocery_list}}, upsert=True)
