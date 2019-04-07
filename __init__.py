@@ -1,4 +1,7 @@
 from mycroft import MycroftSkill, intent_file_handler
+from mycroft.util.log import getLogger
+
+LOGGER = getLogger(__name__)
 
 class GroceryList(MycroftSkill):
     def __init__(self):
@@ -9,6 +12,7 @@ class GroceryList(MycroftSkill):
     def handle_add_item_intent(self, message):
         try:
             item = message.data.get("item")
+
             self.grocery_list.append(item)
             self.speak_dialog("add_success", data=item)
         except:
