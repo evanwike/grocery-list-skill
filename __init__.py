@@ -64,4 +64,4 @@ def create_skill():
     return GroceryList()
 
 def update_db(list: list):
-    lists.update_one({'name': USER}, {'$set': {'items': list}}, upsert=True)
+    lists.update_one({'name': USER}, {'$set': {'items': map(lambda x: x.item, list)}}, upsert=True)
