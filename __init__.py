@@ -14,8 +14,8 @@ class GroceryList(MycroftSkill):
         item = message.data.get("item")
         self.grocery_list.append(item)
 
-        # Detect if item is plural for has/have
-        message = item + (item[len(item) - 1] == 's' ? ' have' : ' has')
+        # Detect if item is plural for has/
+        message = item + (' have' if item[len(item) - 1] == 's' else ' has')
         self.speak_dialog('add_success', data={'message': message})
 
     # Remove item from grocery list
@@ -29,7 +29,7 @@ class GroceryList(MycroftSkill):
             self.grocery_list.remove(item)
 
             # Detect if item is plural for has/have
-            message = item + (item[len(item) - 1] == 's' ? ' have' : ' has')
+            message = item + (' have' if item[len(item) - 1] == 's' else ' has')
             self.speak_dialog('remove_success', data={'message': message})
 
     @intent_file_handler('list.grocery.intent')
