@@ -1,7 +1,14 @@
 from mycroft import MycroftSkill, intent_file_handler
 from mycroft.util.log import getLogger
+import pymongo
 
 LOGGER = getLogger(__name__)
+
+URI = 'mongodb://root:password1@ds049446.mlab.com:49446/hackathon'
+CLIENT = pymongo.MongoClient(URI)
+DB = CLIENT.get_default_database()
+
+evan = DB['evan']
 
 class GroceryList(MycroftSkill):
     def __init__(self):
