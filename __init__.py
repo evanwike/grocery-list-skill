@@ -22,6 +22,7 @@ class GroceryList(MycroftSkill):
 
         if item not in self.grocery_list:
             self.grocery_list.append({'item': item})
+            update_db()
         else:
             self.speak_dialog('add_error', data={'item': item})
 
@@ -36,6 +37,7 @@ class GroceryList(MycroftSkill):
 
         if item not in self.grocery_list:
             self.speak_dialog('remove_error', data={'item': item})
+            update_db()
         else:
             self.grocery_list.remove(item)
 
