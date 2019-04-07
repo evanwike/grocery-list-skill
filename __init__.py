@@ -12,7 +12,11 @@ class GroceryList(MycroftSkill):
     @intent_file_handler('add_item.intent')
     def handle_add_item_intent(self, message):
         item = message.data.get("item")
-        self.grocery_list.append(item)
+
+        if item not in self.grocery_list:
+            self.grocery_list.append(item)
+        else:
+            self.speak_dialog('add_error', data={'item': item})
 
         # Detect if item is plural for has/
         message = item + (' have' if item[len(item) - 1] == 's' else ' has')
