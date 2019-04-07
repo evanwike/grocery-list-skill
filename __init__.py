@@ -9,6 +9,7 @@ CLIENT = pymongo.MongoClient(URI)
 DB = CLIENT.get_default_database()
 
 evan = DB['evan']
+tondi = DB['tondi']
 
 class GroceryList(MycroftSkill):
     def __init__(self):
