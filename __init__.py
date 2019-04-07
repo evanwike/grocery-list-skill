@@ -15,6 +15,7 @@ class GroceryList(MycroftSkill):
     def __init__(self):
         MycroftSkill.__init__(self)
         self.grocery_list = []
+        evan.insert_many(self.grocery_list)
 
     # Add item to grocery list
     @intent_file_handler('add_item.intent')
