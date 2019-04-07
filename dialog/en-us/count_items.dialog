@@ -1,3 +1,2 @@
-There are {n} items on your grocery list
-There are currently {n} items on your grocery list
-{n} items exist on your grocery list
+There {verb} {n} item{s} on your grocery list
+There {verb} currently {n} item{s} on your grocery list

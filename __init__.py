@@ -48,7 +48,10 @@ class GroceryList(MycroftSkill):
     # How many items are on my grocery list?
     @intent_file_handler('count_items.intent')
     def handle_count_items(self, message):
-        self.speak_dialog('count_items', data={'n': len(self.grocery_list)})
+        plural = len(self.grocery_list) > 1
+        verb = 'are' if plural else 'is'
+        s = 's' if plural else ''
+        self.speak_dialog('count_items', data={'n': len(self.grocery_list), 'verb': verb, 's': s})
 
     @intent_file_handler('list_items.intent')
     def handle_list_grocery(self, message):
