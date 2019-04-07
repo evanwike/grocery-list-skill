@@ -37,7 +37,7 @@ class GroceryList(MycroftSkill):
     def handle_count_items(self, message):
         self.speak_dialog('count_items', data={'n': len(self.grocery_list)})
 
-    @intent_file_handler('list.grocery.intent')
+    @intent_file_handler('list_items')
     def handle_list_grocery(self, message):
         if len(self.grocery_list) > 0:
             self.speak_dialog("list_items")
